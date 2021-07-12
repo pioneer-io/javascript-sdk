@@ -1,0 +1,25 @@
+{
+  "name": "jazzy-elks-dummy-sdk",
+  "version": "1.0.2",
+  "description": "A dummy SDK for feature flags",
+  "main": "config.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jazzy-elks/dummy-sdk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jazzy-elks/dummy-sdk/issues"
+  },
+  "homepage": "https://github.com/jazzy-elks/dummy-sdk#readme",
+  "dependencies": {
+    "eventsource": "^1.1.0"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6"
+  }
+}
