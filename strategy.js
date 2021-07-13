@@ -25,7 +25,7 @@ class Strategy {
     }
   }
 
-  // just adds up all the charCodes in the string
+  // just adds up all the charCodes in the string and calculate the percentage
   getHashBasedPercentage(string) {
     const charArr = string.split('');
     const sum = charArr.reduce((sum, char) => {
