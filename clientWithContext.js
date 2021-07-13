@@ -1,13 +1,13 @@
 class ClientWithContext {
-  constructor({context, eventSourceClient, config}) {
+  constructor({context, client, config}) {
     this.context = context;
-    this.eventSourceClient = eventSourceClient;
+    this.client = client;
     this.config = config;
   }
 
   getFeature(key) {
     // get the full feature
-    const featureState = this.eventSourceClient.getFeature(key);
+    const featureState = this.client.getFeature(key);
 
     // evaluate the strategy and return the updated feature (based on the strategy and context)
     const calculatedFeature = featureState.strategy.calculate(this.context);

@@ -9,9 +9,9 @@ class FakeConfig {
   }
 
   connect() {
-    const eventSourceClient = new FakeEventSourceClient(this);
-    this.eventSourceClient = eventSourceClient;
-    eventSourceClient.start();
+    const client = new client(this);
+    this.client = client;
+    client.start();
     return this;
   }
 
@@ -22,7 +22,7 @@ class FakeConfig {
 
         userKey: "user123"
       }),
-      eventSourceClient: self.eventSourceClient,
+      client: self.client,
       config: self
     });
   }
