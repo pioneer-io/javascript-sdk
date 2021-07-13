@@ -8,9 +8,9 @@ class Config {
   }
 
   connect() {
-    const eventSourceClient = new EventSourceClient(this);
-    this.eventSourceClient = eventSourceClient;
-    eventSourceClient.start();
+    const client = new EventSourceClient(this);
+    this.client = client;
+    client.start();
     return this; // the go sdk returns the config rather than the event source client
   }
 
@@ -22,7 +22,7 @@ class Config {
 
         userKey: "user123"
       }),
-      eventSourceClient: self.eventSourceClient,
+      client: self.client,
       config: self
     });
   }

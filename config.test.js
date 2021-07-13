@@ -1,4 +1,4 @@
-const FakeConfig = require('./mocks/fakeConfig');
+const Config = require('./config');
 const FakeStrategy = require('./mocks/fakeStrategy');
 
 describe('testing config', () => {
@@ -6,40 +6,57 @@ describe('testing config', () => {
   const serverAddress = "http://localhost:3030";
   const sdkKey = "JazzyElksRule";
 
-  beforeEach(() => {
-    fakeConfig = new FakeConfig(serverAddress, sdkKey);
+  test("create a new config", () => {
+    let newConfig = new Config(serverAddress, sdkKey);
+    expect(newConfig.serverAddress).toEqual(serverAddress);
+    expect(newConfig.sdkKey).toEqual(sdkKey);
   });
 
-  test("initialize a connection", () => {
-    const client = fakeConfig.connect();
-    const eventSourceClient = client.eventSourceClient;
-    expect(eventSourceClient.apiClient.serverAddress).toEqual(`${serverAddress}/features`);
+  test("connect the config", () => {
+    let newConfig = new Config(serverAddress, sdkKey);
+    newConfig = newConfig.connect();
+    expect(newConfig.client.apiClient.connectionInProgress).toEqual(false);
+    expect(newConfig.client.config).toEqual(newConfig);
+    expect(newConfig.client.features).toMatchObject({});
+    newConfig.client.apiClient.close();
   });
+  
+  
 
-  test("emit a fake event", () => {
-    const client = fakeConfig.connect();
-    const eventSourceClient = client.eventSourceClient;
-    eventSourceClient.apiClient.fakeEmitMessage();
-    expect(eventSourceClient.features).toHaveProperty('show button');
-    expect(eventSourceClient.features).toHaveProperty('show button.key', 'show button');
-  });
+  // beforeEach(() => {
+  //   fakeConfig = new FakeConfig(serverAddress, sdkKey);
+  // });
 
-  test("client with context", () => {
-    fakeConfig.connect();
-    const clientWithContext = fakeConfig.withContext();
-    expect(clientWithContext.context).toHaveProperty('userKey');
+  // test("initialize a connection", () => {
+  //   const client = fakeConfig.connect();
+  //   const eventSourceClient = client.eventSourceClient;
+  //   expect(eventSourceClient.apiClient.serverAddress).toEqual(`${serverAddress}/features`);
+  // });
 
-    // retrieve the feature
-    clientWithContext.eventSourceClient.apiClient.fakeEmitMessage();
+  // test("emit a fake event", () => {
+  //   const client = fakeConfig.connect();
+  //   const eventSourceClient = client.eventSourceClient;
+  //   eventSourceClient.apiClient.fakeEmitMessage();
+  //   expect(eventSourceClient.features).toHaveProperty('show button');
+  //   expect(eventSourceClient.features).toHaveProperty('show button.key', 'show button');
+  // });
 
-    // current key is 'user123'
-    expect((FakeStrategy.basicHash(clientWithContext.context.getKey()) % 100) / 100).toBeGreaterThan(0.5);
-    expect(clientWithContext.getFeature('show button')).toBe(false);
+  // test("client with context", () => {
+  //   fakeConfig.connect();
+  //   const clientWithContext = fakeConfig.withContext();
+  //   expect(clientWithContext.context).toHaveProperty('userKey');
 
-    // set the key to a string that passes the percent requirement
-    clientWithContext.context.userKey = 'cde';
-    expect((FakeStrategy.basicHash(clientWithContext.context.getKey()) % 100) / 100).toBeLessThanOrEqual(0.5);
-    expect(clientWithContext.getFeature('show button')).toBe(true);
-  });
+  //   // retrieve the feature
+  //   clientWithContext.eventSourceClient.apiClient.fakeEmitMessage();
+
+  //   // current key is 'user123'
+  //   expect((FakeStrategy.basicHash(clientWithContext.context.getKey()) % 100) / 100).toBeGreaterThan(0.5);
+  //   expect(clientWithContext.getFeature('show button')).toBe(false);
+
+  //   // set the key to a string that passes the percent requirement
+  //   clientWithContext.context.userKey = 'cde';
+  //   expect((FakeStrategy.basicHash(clientWithContext.context.getKey()) % 100) / 100).toBeLessThanOrEqual(0.5);
+  //   expect(clientWithContext.getFeature('show button')).toBe(true);
+  // });
 });
 
