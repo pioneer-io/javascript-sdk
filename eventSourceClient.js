@@ -40,9 +40,14 @@ class EventSourceClient {
 
         case eventTypes.UPDATE_FEATURE:
           this.handleUpdateFeature(payload);
+          return
           
         case eventTypes.ALL_FEATURES:
           this.handleAllFeatures(payload);
+          return
+
+        case eventTypes.CREATE_CONNECTION:
+          return
       }
     }
   }
@@ -60,13 +65,17 @@ class EventSourceClient {
     this.features[key] = new FeatureState(payload);
   }
 
-  handleAllFeatures(payload) {
+  handleAllFeatures(allFeatures) {
     // initialize a new object of feature states and override the previous value
     const featureStates = {};
 
-    payload.forEach((featureStateParams) => {
-      const { key } = featureStateParams;
-      featureStates[key] = new FeatureState(featureStateParams);
+    allFeatures.forEach((featureStateParams) => {
+      const { title, is_active } = featureStateParams;
+      const modifiedFeatureStateParams = {
+        value: is_active,
+        title
+      }
+      featureStates[title] = new FeatureState(modifiedFeatureStateParams);
     })
     this.features = featureStates;
   }

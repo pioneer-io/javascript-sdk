@@ -4,7 +4,9 @@ class FeatureState {
   constructor({key, value, strategy}) {
     this.key = key;
     this.value = value;
-    this.strategy = new Strategy(strategy);
+    if (strategy) {
+      this.strategy = new Strategy(strategy);
+    }
   }
 
 }

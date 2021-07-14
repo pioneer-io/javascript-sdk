@@ -1,7 +1,7 @@
 {
-  "name": "jazzy-elks-dummy-sdk",
-  "version": "1.0.2",
-  "description": "A dummy SDK for feature flags",
+  "name": "pioneer-javascript-sdk",
+  "version": "1.0.0",
+  "description": "Pioneer javascript SDK for feature flags",
   "main": "config.js",
   "scripts": {
     "test": "jest"
