@@ -8,7 +8,7 @@
 
 ```javascript
 const SDK = require("jazzy-elks-dummy-sdk");
-const config = new SDK("http://localhost:3030", "JazzyElksRule").connect().withWaitForData();
+const config = await new SDK("http://localhost:3030", "JazzyElksRule").connect().withWaitForData();
 const sdkClient = config.client; // makes an active sse connection
 console.log(sdkClient.get("Hi")); // gets feature
 ```
