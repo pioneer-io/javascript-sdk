@@ -8,6 +8,8 @@ class EventSourceClient {
 
     this.config = config;
     this.features = {};
+
+    this.hasData = false;
     
     const options = {
       headers: { Authorization: config.sdkKey}
@@ -66,6 +68,7 @@ class EventSourceClient {
   }
 
   handleAllFeatures(allFeatures) {
+    allFeatures = JSON.parse(allFeatures);
     // initialize a new object of feature states and override the previous value
     const featureStates = {};
 
@@ -78,10 +81,12 @@ class EventSourceClient {
       featureStates[title] = new FeatureState(modifiedFeatureStateParams);
     })
     this.features = featureStates;
+
+    this.hasData = true;
   }
 
   getFeature(key) {
-    const value = this.features[key];
+    const value = this.features[key].value;
     return value;
   }
 }
