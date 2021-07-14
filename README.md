@@ -8,9 +8,9 @@
 
 ```javascript
 const SDK = require("jazzy-elks-dummy-sdk");
-const client = new SDK("http://localhost:3030", "JazzyElksRule");
-const eventSourceClient = client.connect(); // makes an active sse connection
-console.log(eventSourceClient.get("Hi")); // gets feature
+const config = new SDK("http://localhost:3030", "JazzyElksRule").connect();
+const sdkClient = config.client; // makes an active sse connection
+console.log(sdkClient.get("Hi")); // gets feature
 ```
 
 
