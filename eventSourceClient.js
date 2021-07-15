@@ -1,6 +1,7 @@
 const EventSource = require("eventsource");
 const eventTypes = require('./lib/eventTypes');
 const FeatureState = require('./featureState');
+const handleUndefinedFeature = require('./lib/handleUndefinedFeature');
 
 class EventSourceClient {
   constructor(config) {
@@ -86,16 +87,16 @@ class EventSourceClient {
   }
 
   getFeature(key, defaultValue) {
-    const featureState = this.features[key];
+    const featureState = this.getFeatureState(key);
     if (!featureState) {
-      if (defaultValue !== undefined || defaultValue !== null) {
-        console.warn(`Warning: Could not get ${key} from features, using provided default value!`);
-        return defaultValue;
-      }
-      throw new Error(`Error: ${key} does not exist, cannot get get feature!`);
+      return handleUndefinedFeature(key, defaultValue);
     }
     const value = featureState.value;
     return value;
+  }
+
+  getFeatureState(key) {
+    return this.features[key];
   }
 }
 
