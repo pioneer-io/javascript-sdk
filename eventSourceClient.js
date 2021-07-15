@@ -85,11 +85,14 @@ class EventSourceClient {
     this.hasData = true;
   }
 
-  getFeature(key) {
+  getFeature(key, defaultValue) {
     const featureState = this.features[key];
     if (!featureState) {
-      console.log(`Error: ${key} does not exist, cannot get get feature!`);
-      return null;
+      if (defaultValue !== undefined || defaultValue !== null) {
+        console.warn(`Warning: Could not get ${key} from features, using provided default value!`);
+        return defaultValue;
+      }
+      throw new Error(`Error: ${key} does not exist, cannot get get feature!`);
     }
     const value = featureState.value;
     return value;
