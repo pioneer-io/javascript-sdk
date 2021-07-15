@@ -88,7 +88,8 @@ class EventSourceClient {
   getFeature(key) {
     const featureState = this.features[key];
     if (!featureState) {
-      return false;
+      console.log(`Error: ${key} does not exist, cannot get get feature!`);
+      return null;
     }
     const value = featureState.value;
     return value;
