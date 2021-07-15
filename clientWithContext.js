@@ -1,4 +1,4 @@
-const handleUndefinedFeature = require('./lib/hanldeUndefinedFeature');
+const handleUndefinedFeature = require('./lib/handleUndefinedFeature');
 
 class ClientWithContext {
   constructor({context, client, config}) {
