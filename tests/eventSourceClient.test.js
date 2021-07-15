@@ -1,9 +1,9 @@
-const EventSourceClient = require('./eventSourceClient');
+const EventSourceClient = require('../eventSourceClient');
 const EventSource = require('eventsource');
-const FakeEventSource = require('./mocks/fakeEventSource');
-const FeatureState = require('./featureState');
+const FakeEventSource = require('../mocks/fakeEventSource');
+const FeatureState = require('../featureState');
 
-const Config = require('./config');
+const Config = require('../config');
 
 describe("testing eventSourceClient", () => {
   const serverAddress = "http://localhost:3030";
