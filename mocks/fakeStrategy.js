@@ -31,7 +31,7 @@ class FakeStrategy {
     const sum = charArr.reduce((sum, char) => {
       return sum + char.charCodeAt();
     }, 0);
-    const hashedPercentage = ((sum % Strategy.modulus) + 1) / Strategy.modulus;
+    const hashedPercentage = ((sum % FakeStrategy.modulus) + 1) / FakeStrategy.modulus;
     return hashedPercentage;
   }
 

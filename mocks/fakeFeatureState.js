@@ -1,8 +1,8 @@
 const FakeStrategy = require('./fakeStrategy');
 
 class FakeFeatureState {
-  constructor({key, value, strategy}) {
-    this.key = key;
+  constructor({title, value, strategy}) {
+    this.title = title;
     this.value = value;
     this.strategy = new FakeStrategy(strategy);
   }
