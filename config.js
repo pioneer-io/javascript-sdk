@@ -30,13 +30,12 @@ class Config {
     return this;
   }
 
-  withContext() {
+  withContext({userKey}) {
     // make sure we are staying in this context
     const self = this;
     return new ClientWithContext({
       context: new Context({
-
-        userKey: "user123"
+        userKey
       }),
       client: self.client,
       config: self
