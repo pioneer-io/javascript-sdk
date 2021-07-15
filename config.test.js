@@ -8,7 +8,7 @@ describe('testing config', () => {
   const serverAddress = "http://localhost:3030";
   const sdkKey = "JazzyElksRule";
 
-  test("create a new config", () => {
+  xtest("create a new config", () => {
     let newConfig = new Config(serverAddress, sdkKey);
     expect(newConfig.serverAddress).toEqual(serverAddress);
     expect(newConfig.getServerAddress()).toEqual(`${serverAddress}/features`);

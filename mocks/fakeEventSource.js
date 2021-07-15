@@ -13,20 +13,25 @@ class FakeEventSource {
     const event = {
       data: JSON.stringify({
         eventType: "ALL_FEATURES",
-        payload: [
+        payload: JSON.stringify([
           {
-            key: "show button",
-            value: false,
+            title: "LOGIN_MICROSERVICE",
+            is_active: false,
             strategy: {
               percentage: 0.5,
               value: true
             }
           }
-        ]
+        ])
       }
     )
   };
   this.onmessage(event);
+  }
+
+  close() {
+    console.log("Closing fake event source");
+    return;
   }
 }
 
