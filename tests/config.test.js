@@ -1,8 +1,8 @@
-const Config = require('./config');
-const ClientWithContext = require('./clientWithContext');
-const Context = require('./context');
-const EventSourceClient = require('./eventSourceClient');
-const FakeStrategy = require('./mocks/fakeStrategy');
+const Config = require('../config');
+const ClientWithContext = require('../clientWithContext');
+const Context = require('../context');
+const EventSourceClient = require('../eventSourceClient');
+const FakeStrategy = require('../mocks/fakeStrategy');
 
 describe('testing config', () => {
   const serverAddress = "http://localhost:3030";
