@@ -15,9 +15,17 @@ class Config {
     return this; // the go sdk returns the config rather than the event source client
   }
 
-  async withWaitForData() {
+  async withWaitForData(options = {timeOut: 100, pollingAttempts: 100}) {
+    const { timeOut, pollingAttempts } = options;
+    let attempts = 0;
     while (this.client.hasData === false) {
-      await wait();
+      attempts++
+      if (attempts > pollingAttempts) {
+        // throw new Error("Waiting for data reached the max number of attempts");
+        console.log("time out");
+        break;
+      }
+      await wait(timeOut);
     }
     return this;
   }

@@ -12,12 +12,13 @@ describe('testing config', () => {
     expect(newConfig.sdkKey).toEqual(sdkKey);
   });
 
-  test("connect the config", () => {
+  test("connect the config", async () => {
     let newConfig = new Config(serverAddress, sdkKey);
     newConfig = newConfig.connect();
     expect(newConfig.client.apiClient.connectionInProgress).toEqual(false);
     expect(newConfig.client.config).toEqual(newConfig);
     expect(newConfig.client.features).toMatchObject({});
+    expect(await newConfig.withWaitForData({timeOut: 100, pollingAttempts: 1})).toThrow();
     newConfig.client.apiClient.close();
   });
   
