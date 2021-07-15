@@ -1,5 +1,6 @@
 const EventSourceClient = require('./eventSourceClient');
 const ClientWithContext = require('./clientWithContext');
+const Context = require('./context');
 const wait = require('./lib/wait');
 
 class Config {
