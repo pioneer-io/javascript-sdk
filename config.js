@@ -1,11 +1,6 @@
 const EventSourceClient = require('./eventSourceClient');
 const ClientWithContext = require('./clientWithContext');
-
-const wait = function (ms = 1000) {
-  return new Promise(resolve => {
-    setTimeout(resolve, ms);
-  });
-};
+const wait = require('./lib/wait');
 
 class Config {
   constructor(serverAddress, sdkKey) {
