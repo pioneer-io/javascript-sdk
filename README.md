@@ -7,7 +7,7 @@
 **Usage**
 
 ```javascript
-const SDK = require("jazzy-elks-dummy-sdk");
+const SDK = require("pioneer-javascript-sdk");
 const config = await new SDK("http://localhost:3030", "JazzyElksRule").connect().withWaitForData();
 const sdkClient = config.client; // makes an active sse connection
 console.log(sdkClient.get("Hi")); // gets feature

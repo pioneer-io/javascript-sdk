@@ -86,7 +86,11 @@ class EventSourceClient {
   }
 
   getFeature(key) {
-    const value = this.features[key].value;
+    const featureState = this.features[key];
+    if (!featureState) {
+      return false;
+    }
+    const value = featureState.value;
     return value;
   }
 }
