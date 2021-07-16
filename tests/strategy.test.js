@@ -6,7 +6,7 @@ describe("testing strategy", () => {
   test("creating a new strategy", () => {
     const strategy = new Strategy({ percentage: 0.1, value: true });
     expect(strategy.percentage).toBe(0.1);
-    expect(strategy.value).toBe(true);
+    // expect(strategy.value).toBe(true); // value property no longer added because strategy will only return true/false
   });
 
   test("hashBasedPercentage of user123", () => {
@@ -22,7 +22,7 @@ describe("testing strategy", () => {
   test("calculating a strategy value that does not meet the percentage", () => {
     const strategy = new Strategy({ percentage: 0.1, value: true });
     const context = new FakeContext({ userKey: "user123" });
-    expect(strategy.calculate(context)).toBe(null);
+    expect(strategy.calculate(context)).toBe(false);
   });
 
   test("calculating a strategy value that does meet the percentage", () => {

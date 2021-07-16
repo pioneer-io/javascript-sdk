@@ -13,7 +13,6 @@ describe("testing clientWithContext", () => {
     value: false,
     strategy: {
       percentage: 0.1,
-      value: true
     }
   });
 

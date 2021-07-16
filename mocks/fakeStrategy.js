@@ -18,11 +18,7 @@ class FakeStrategy {
     
     // check if the hashedPercentage meets the requirements
     // if it matches, then return the strategy value
-    if (hashedPercentage <= this.percentage) {
-      return this.value;
-    } else {
-      return null;
-    }
+    return hashedPercentage <= this.percentage;
   }
 
   // just adds up all the charCodes in the string

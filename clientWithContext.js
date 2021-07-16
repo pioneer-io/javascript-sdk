@@ -15,13 +15,13 @@ class ClientWithContext {
     }
 
     // evaluate the strategy and return the updated feature (based on the strategy and context)
-    const calculatedFeature = featureState.strategy.calculate(this.context);
+    return featureState.strategy.calculate(this.context) // either true/false;
 
-    if (calculatedFeature) {
-      return calculatedFeature;
-    } else {
-      return featureState.value;
-    };
+    // if (calculatedFeature) {
+    //   return calculatedFeature;
+    // } else {
+    //   return featureState.value;
+    // };
   }
 }
 

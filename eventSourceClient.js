@@ -74,10 +74,13 @@ class EventSourceClient {
     const featureStates = {};
 
     allFeatures.forEach((featureStateParams) => {
-      const { title, is_active } = featureStateParams;
+      const { title, is_active, rollout } = featureStateParams;
       const modifiedFeatureStateParams = {
         value: is_active,
-        title
+        title,
+        strategy: {
+          percentage: rollout
+        }
       }
       featureStates[title] = new FeatureState(modifiedFeatureStateParams);
     })
