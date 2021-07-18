@@ -1,4 +1,5 @@
-## A dummy SDK for Feature Flags
+## A Node.js SDK for Pioneer-io Feature Flag Management
+[![pioneer-javascript-sdk](https://github.com/pioneer-io/javascript-sdk/actions/workflows/verify.yml/badge.svg)](https://github.com/pioneer-io/javascript-sdk/actions/workflows/verify.yml)
 
 **Installation**
 
