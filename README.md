@@ -3,7 +3,7 @@
 
 **Installation**
 
-`npm install jazzy-elks-dummy-sdk` for the package.
+`npm install pioneer-javascript-sdk` for the package.
 
 **Usage**
 
