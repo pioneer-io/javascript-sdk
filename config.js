@@ -1,12 +1,14 @@
 const EventSourceClient = require('./eventSourceClient');
 const ClientWithContext = require('./clientWithContext');
 const Context = require('./context');
+const AnalyticsCollector = require('./analyticsCollector');
 const wait = require('./lib/wait');
 
 class Config {
   constructor(serverAddress, sdkKey) {
     this.serverAddress = serverAddress;
     this.sdkKey = sdkKey;
+    this.analyticsCollectors = [];
   }
 
   connect() {
@@ -45,6 +47,24 @@ class Config {
 
   getServerAddress() {
     return `${this.serverAddress}/features`;
+  }
+
+  addGoogleAnalyticsCollector({ trackingId, clientId }) {
+    const analyticsCollector = new AnalyticsCollector({ trackingId, clientId });
+    this.analyticsCollectors.push(analyticsCollector);
+    return analyticsCollector;
+  }
+
+
+  logEvent({ category, action, label, value }) {
+    this.analyticsCollectors.forEach((analyticsCollector) => {
+      analyticsCollector.logEvent({
+        category,
+        action,
+        label,
+        value
+      });
+    })
   }
 }
 

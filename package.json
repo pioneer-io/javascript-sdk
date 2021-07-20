@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/jazzy-elks/dummy-sdk#readme",
   "dependencies": {
-    "eventsource": "^1.1.0"
+    "axios": "^0.21.1",
+    "eventsource": "^1.1.0",
+    "node-fetch": "^2.6.1",
+    "universal-analytics": "^0.4.23"
   },
   "devDependencies": {
     "jest": "^27.0.6"
