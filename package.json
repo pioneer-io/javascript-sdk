@@ -4,7 +4,7 @@
   "description": "Pioneer javascript SDK for feature flags",
   "main": "config.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --silent",
     "start": "node quickStart"
   },
   "repository": {
