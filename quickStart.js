@@ -6,8 +6,10 @@
     const context = config.withContext({ userKey: "abc" });
     context.addGoogleAnalyticsCollector({
       trackingId: 'UA-201694275-1',
-      clientId: '12345'
+      clientId: '12345',
+      strictCidFormat: false
     });
+    console.log(context.client.analyticsCollectors);
     context.logEvent({
       category: "test",
       action: "print",
