@@ -104,8 +104,8 @@ class EventSourceClient {
     return this.features[key];
   }
 
-  addGoogleAnalyticsCollector({ trackingId, clientId }) {
-    const analyticsCollector = new AnalyticsCollector({ trackingId, clientId });
+  addGoogleAnalyticsCollector({ trackingId, clientId, strictCidFormat }) {
+    const analyticsCollector = new AnalyticsCollector({ trackingId, clientId, strictCidFormat });
     this.analyticsCollectors.push(analyticsCollector);
     return analyticsCollector;
   }
