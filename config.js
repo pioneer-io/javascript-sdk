@@ -8,6 +8,7 @@ class Config {
   constructor(serverAddress, sdkKey) {
     this.serverAddress = serverAddress;
     this.sdkKey = sdkKey;
+    this.client = undefined;
   }
 
   connect() {
