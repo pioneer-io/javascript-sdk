@@ -1,5 +1,6 @@
 # A Node.js SDK for Pioneer-io Feature Flag Management
 [![pioneer-javascript-sdk](https://github.com/pioneer-io/javascript-sdk/actions/workflows/verify.yml/badge.svg)](https://github.com/pioneer-io/javascript-sdk/actions/workflows/verify.yml)
+[![npm version](https://badge.fury.io/js/pioneer-javascript-sdk.svg)](https://www.npmjs.com/package/pioneer-javascript-sdk)
 
 ## Installation
 
