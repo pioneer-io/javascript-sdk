@@ -25,7 +25,7 @@ class Config {
       attempts++
       if (attempts > pollingAttempts) {
         // throw new Error("Waiting for data reached the max number of attempts");
-        console.log("time out");
+        console.log("Waiting for data reached the max number of attempts, time out");
         break;
       }
       const randomJitter = (timeOut * Math.random());
