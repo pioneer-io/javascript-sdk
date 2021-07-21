@@ -18,7 +18,7 @@ class Config {
     return this; // the go sdk returns the config rather than the event source client
   }
 
-  async withWaitForData(options = {timeOut: 100, pollingAttempts: 100}) {
+  async withWaitForData(options = {timeOut: 1000, pollingAttempts: 10}) {
     const { timeOut, pollingAttempts } = options;
     let attempts = 0;
     while (this.client.hasData === false) {
@@ -28,7 +28,8 @@ class Config {
         console.log("time out");
         break;
       }
-      await wait(timeOut);
+      const randomJitter = (timeOut * Math.random());
+      await wait(timeOut + randomJitter);
     }
     return this;
   }
