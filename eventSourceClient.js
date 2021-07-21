@@ -1,6 +1,7 @@
 const EventSource = require("eventsource");
 const eventTypes = require('./lib/eventTypes');
 const FeatureState = require('./featureState');
+const AnalyticsCollector = require('./analyticsCollector');
 const handleUndefinedFeature = require('./lib/handleUndefinedFeature');
 
 class EventSourceClient {
@@ -11,6 +12,7 @@ class EventSourceClient {
     this.features = {};
 
     this.hasData = false;
+    this.analyticsCollectors = [];
     
     const options = {
       headers: { Authorization: config.sdkKey}
@@ -100,6 +102,24 @@ class EventSourceClient {
 
   getFeatureState(key) {
     return this.features[key];
+  }
+
+  addGoogleAnalyticsCollector({ trackingId, clientId }) {
+    const analyticsCollector = new AnalyticsCollector({ trackingId, clientId });
+    this.analyticsCollectors.push(analyticsCollector);
+    return analyticsCollector;
+  }
+
+
+  logEvent({ category, action, label, value }) {
+    this.analyticsCollectors.forEach((analyticsCollector) => {
+      analyticsCollector.logEvent({
+        category,
+        action,
+        label,
+        value
+      });
+    })
   }
 }
 

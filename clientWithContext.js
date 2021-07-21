@@ -19,11 +19,11 @@ class ClientWithContext {
   }
 
   addGoogleAnalyticsCollector(params) {
-    return this.config.addGoogleAnalyticsCollector(params);
+    return this.client.addGoogleAnalyticsCollector(params);
   }
 
   logEvent(params) {
-    this.config.logEvent(params);
+    this.client.logEvent(params);
   }
 }
 
