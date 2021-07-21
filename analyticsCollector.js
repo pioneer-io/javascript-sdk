@@ -12,7 +12,7 @@ class AnalyticsCollector {
 
   logEvent({ category, action, label, value }) {
     this.visitor.event(category, action, label, value, (err) => {
-      console.log("Error loggin google analytics event", err);
+      console.log("Error logging google analytics event", err);
     });
   }
 }

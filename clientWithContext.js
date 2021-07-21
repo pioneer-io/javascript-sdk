@@ -17,6 +17,14 @@ class ClientWithContext {
     // evaluate the strategy and return the updated feature (based on the strategy and context)
     return featureState.strategy.calculate(this.context) // either true/false;
   }
+
+  addGoogleAnalyticsCollector(params) {
+    return this.config.addGoogleAnalyticsCollector(params);
+  }
+
+  logEvent(params) {
+    this.config.logEvent(params);
+  }
 }
 
 module.exports = ClientWithContext;
