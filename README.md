@@ -140,27 +140,27 @@ A `Config` instance should be passed into the constructor.
 
 **Instance Properties:**
 
-### `config`<br>
+### `EventSource.prototype.config`<br>
 The `Config` instance passed in from the constructor
 
-### `features` <br>
+### `EventSource.prototype.features` <br>
 This will be initialized to an empty object in the constructor. When an SSE connection is established and the SDK client receives the entire feature set from Scout, this property will be populated with that featureset, representing an array of feature state instances. This property will be referenced by the `getFeatures` method and the developer would probably only use this for debuggin purposes.
 
-### `hasData` <br>
+### `EventSource.prototype.hasData` <br>
 This will be initialized to `false`. Once the SDK client has received data from Scout, this will be set to `true`. This property is checked by the `withWaitForData` method, to poll for when the SDK has received data. It could also be used for debugging purposes by the developer.
 
-### `apiClient` <br>
+### `EventSource.prototype.apiClient` <br>
 This will refer to the actual `eventsource` instance intialized by the polyfill package. You can call methods like `close()` on this instance if you want to manually close the connection.
 
 **Instance Methods:**
 
-### `getFeature()` <br>
+### `EventSource.prototype.getFeature()` <br>
 This will take in a key (string) and a default value (boolean). It will check the `features` ruleset for a matching key and return the value of that feature (a boolean). If a matching key is not found, the method will default to the default value. If a default value is not supplied, it will throw an error.
 
-### `getFeatureState()` <br>
+### `EventSource.prototype.getFeatureState()` <br>
 This method will take in a key and return the feature state in `features` corresponding to that key. If no feature state is found, the method will return undefined.
 
-### `addGoogleAnalyticsCollector()` <br>
+### `EventSource.prototype.addGoogleAnalyticsCollector()` <br>
 This takes in an object literal, consisting of the following properties:
 `{ trackingId: string, clientId: string (optional), strictCidFormat: boolean (optional) }`
 
@@ -174,7 +174,7 @@ The `trackingId` and `clientId` should both be strings. The `strictCidFormat` is
 
 This method will append an instance of the `AnalyticsCollector` class to a list of analytics collectors and return the instance.
 
-### `logEvent()` <br>
+### `EventSource.prototype.logEvent()` <br>
 This method takes in an object literal, consiting of the following properties:
 `{ category: string, action: string, label: string, value: number }`
 
@@ -195,26 +195,26 @@ This method will iterate over all appended analytics collectors and call the `lo
 
 ## **Instance Properties**
 
-### `context` <br>
+### `ClientWithContext.prototype.context` <br>
 An instance of the `Context` class. This basically just has the `userKey` property and a `getKey()` getter method. The context will be factored into calculating the strategy value when calling `getFeature()` on a `clientWithContext` instance.
 
-### `client` <br>
+### `ClientWithContext.prototype.client` <br>
 This refers to the `client` instance of the `EventSourceClient` class.
 
-### `config` <br>
+### `ClientWithContext.prototype.config` <br>
 This referse to the `config` instance of the `Config` class (on which you call the `withContext()` method).
 
 ## **Instance Methods**
 
-### `getFeature()` <br>
+### `ClientWithContext.prototype.getFeature()` <br>
 This will take in a key (string) and a default value (boolean). It will check the `features` ruleset for a matching key and return the value of that feature (a boolean). If a matching key is not found, the method will default to the default value. If a default value is not supplied, it will throw an error.
 
 The difference between the `getFeature()` method on the `EventSourceClient` instance is that this will evaluate a percentage strategy based on the context, which has the `userKey`. It will sum up the char codes of the `userKey` modulus 100 and return a number between 1-100. If that number is lower than the percentage strategy, it will return true. Otherwise, it will return false.
 
-### `addGoogleAnalyticsCollector()` <br>
+### `ClientWithContext.prototype.addGoogleAnalyticsCollector()` <br>
 This will basically take in the same parameters as the `addGoogleAnalyticsCollector()` method of `EventSourceClient`. It will then call `addGoogleAnalyticsCollector` on its `client` property with those parameters.
 
-### `logEvent()` <br>
+### `ClientWithContext.prototype.logEvent()` <br>
 This will basically take in the same parameters as the `logEvent()` method of `EventSourceClient`. It will then call `logEvent()` on its `client` property with those parameters.
 
 ------
