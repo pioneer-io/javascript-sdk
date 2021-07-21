@@ -18,18 +18,17 @@ class Config {
     return this; // the go sdk returns the config rather than the event source client
   }
 
-  async withWaitForData(options = {timeOut: 1000, pollingAttempts: 10}) {
-    const { timeOut, pollingAttempts } = options;
+  async withWaitForData() {
     let attempts = 0;
     while (this.client.hasData === false) {
       attempts++
-      if (attempts > pollingAttempts) {
+      if (attempts > 10) {
         // throw new Error("Waiting for data reached the max number of attempts");
         console.log("Waiting for data reached the max number of attempts, time out");
         break;
       }
-      const randomJitter = (timeOut * Math.random());
-      await wait(timeOut + randomJitter);
+      const randomJitter = (9000 * Math.random());
+      await wait(1000 + randomJitter);
     }
     return this;
   }

@@ -27,14 +27,15 @@ describe('testing config', () => {
 
   xtest("withWaitForData will wait until it times out", async () => {
     let newConfig = new Config(serverAddress, sdkKey).connect();
-    const timeOut = 10;
-    const pollingAttempts = 5;
+    // const timeOut = 10;
+    // const pollingAttempts = 5;
     
     const start = Date.now();
-    await newConfig.withWaitForData({ timeOut, pollingAttempts });
+    await newConfig.withWaitForData();
     const end = Date.now();
 
-    expect(end - start).toBeGreaterThanOrEqual(timeOut * pollingAttempts);
+    // expect(end - start).toBeGreaterThanOrEqual(timeOut * pollingAttempts);
+    console.log(start, end);
     newConfig.client.apiClient.close();
   });
 
