@@ -14,6 +14,10 @@ class ClientWithContext {
       return handleUndefinedFeature(key, defaultValue);
     }
 
+    if (featureState.value === false) {
+      return false;
+    }
+
     // evaluate the strategy and return the updated feature (based on the strategy and context)
     return featureState.strategy.calculate(this.context) // either true/false;
   }
