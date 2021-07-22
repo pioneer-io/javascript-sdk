@@ -1,6 +1,6 @@
 {
   "name": "pioneer-javascript-sdk",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Pioneer javascript SDK for feature flags",
   "main": "config.js",
   "scripts": {
