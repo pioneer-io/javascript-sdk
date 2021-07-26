@@ -1,6 +1,14 @@
-# A Node.js SDK for Pioneer-io Feature Flag Management
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/19399698/126998779-e3bc3a2d-0e2a-4353-8f3e-9aa857455fe5.png" alt="Pioneer logo" width="200" height="200">
+</p>
+
+# Node.js SDK for Pioneer
 [![pioneer-javascript-sdk](https://github.com/pioneer-io/javascript-sdk/actions/workflows/verify.yml/badge.svg)](https://github.com/pioneer-io/javascript-sdk/actions/workflows/verify.yml)
 [![npm version](https://badge.fury.io/js/pioneer-javascript-sdk.svg)](https://www.npmjs.com/package/pioneer-javascript-sdk)
+
+This package is a server-side SDK for applications written in Node.js using Pioneer's feature management service.
+
+Visit the [pioneer-io/compass](github.com/pioneer-io/compass) repo for more, and check out Pioneer's case study page.
 
 ## Installation
 
@@ -222,13 +230,3 @@ This will basically take in the same parameters as the `logEvent()` method of `E
 
 ## Tests
 To run tests, simply run `npm test`, which will run unit tests for most of the classes.
-
-## Dev Log
-### 6/30/21
-EventSource API does not allow custom headers, need one for "Authorization", could pass in using URL string but loggers might log it. Therefore used a polyfill, that allows for custom headers...
-
-### 7/5/21
-Updated SDK to accept the entire ruleset for updates from Scout
-
-### 7/20/21
-Added google analytics integration to log
