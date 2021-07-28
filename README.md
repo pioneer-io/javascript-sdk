@@ -1,6 +1,14 @@
-# A Node.js SDK for Pioneer-io Feature Flag Management
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/19399698/126998779-e3bc3a2d-0e2a-4353-8f3e-9aa857455fe5.png" alt="Pioneer logo" width="200" height="200">
+</p>
+
+# Node.js SDK for Pioneer
 [![pioneer-javascript-sdk](https://github.com/pioneer-io/javascript-sdk/actions/workflows/verify.yml/badge.svg)](https://github.com/pioneer-io/javascript-sdk/actions/workflows/verify.yml)
 [![npm version](https://badge.fury.io/js/pioneer-javascript-sdk.svg)](https://www.npmjs.com/package/pioneer-javascript-sdk)
+
+This package is a server-side SDK for applications written in Node.js using Pioneer's feature management service.
+
+Visit the [pioneer-io/compass](github.com/pioneer-io/compass) repo for more, and check out Pioneer's case study page.
 
 ## Installation
 
@@ -8,7 +16,7 @@
 
 ## Basic Usage
 
-To initialize a new SDK client, you need to pass in the server address and port of Scout for the first parameter. **Scout is the name of a daemon that serves the entire feature ruleset to all connected SDK clients through SSE.** Note, that if the actual endpoint contains a path like "/features", then you should include that in the `getServerAddress()` method of config. In addition, you need to supply an SDK key so that scout can authenticate requests. This SDK key must match the one in Pioneer and can be found in the frontend under the 'Account' tab.
+To initialize a new SDK client, you need to pass in the server address and port of Scout for the first parameter. **Scout is the name of a daemon that serves the entire feature ruleset to all connected SDK clients through SSE.** Note, that if the actual endpoint contains a path like "/features", then you should include that in the `getServerAddress()` method of config. In addition, you need to supply an SDK key so that Scout can authenticate requests. This SDK key must match the one provded by Compass, and can be found under the 'Account' tab via the user interface.
 
 After instantiating a new SDK, you can call `connect()` which will attempt to connect with Scout. You should also chain another method called `withWaitForData()`. Calling await on this method will block the code until the SDK receives the entire ruleset from Scout. You can supply parameters for how long and how many times it should try to connect before timing out.
 
@@ -18,7 +26,7 @@ After you have connected, the `client` property on the config instance should be
 ```javascript
 const SDK = require("pioneer-javascript-sdk");
 const scoutAddress = "http://localhost:3030"; // if the actual address has a path, include that in the getServerAddress() method
-const sdkKey = "JazzyElksRule"; // the sdkKey that should match the sdkKey in Pioneer
+const sdkKey = "JazzyElksRule"; // the sdkKey that should match the sdkKey provided by Compass
 const config = await new SDK(scoutAddress, sdkKey).connect().withWaitForData({ timeOut: 1000, pollingAttempts: 10 });  // makes an active sse connection
 const sdkClient = config.client;
 console.log(sdkClient.getFeature("LOGIN_MICROSERVICE")); // gets the feature value
@@ -26,7 +34,7 @@ console.log(sdkClient.getFeature("LOGIN_MICROSERVICE")); // gets the feature val
 
 ## Adding a Context
 
-This SDK allows you to specify a context when calling the `getFeature` method. A context allows the SDK to evaluate strategies associated with a certain feature state. For example, a feature flag has a rollout strategy, such that only 10% of users should get the new feature, if the feature flag was turned on in Pioneer. In order to determine whether a user gets that new feature, the developer should supply a userKey that uniquely identifies that user. The SDK will calculate the percentage associated with that uesrKey and if that percentage is lower than 10%, then the SDK will evaluate to true.
+This SDK allows you to specify a context when calling the `getFeature` method. A context allows the SDK to evaluate strategies associated with a certain feature state. For example, a feature flag has a rollout strategy, such that only 10% of users should get the new feature, if the feature flag was turned on in via the Compass user interface or API. In order to determine whether a user gets that new feature, the developer should supply a userKey that uniquely identifies that user. The SDK will calculate the percentage associated with that uesrKey and if that percentage is lower than 10%, then the SDK will evaluate to true.
 
 ```javascript
 const SDK = require("pioneer-javascript-sdk");
@@ -100,7 +108,7 @@ A string that represents the host name/address and port. Eg: `http://localhost:3
 
 `sdkKey`
 
-A string that represents the sdk key that is to be used for authorization. Generally, in a UUID format and can be found under the 'Account' tab under the Pioneer GUI.
+A string that represents the sdk key that is to be used for authorization. Generally, in a UUID format and can be found under the 'Account' tab in the Compass user interface.
 
 ## **Instance Properties**
 
@@ -221,13 +229,3 @@ This will basically take in the same parameters as the `logEvent()` method of `E
 
 ## Tests
 To run tests, simply run `npm test`, which will run unit tests for most of the classes.
-
-## Dev Log
-### 6/30/21
-EventSource API does not allow custom headers, need one for "Authorization", could pass in using URL string but loggers might log it. Therefore used a polyfill, that allows for custom headers...
-
-### 7/5/21
-Updated SDK to accept the entire ruleset for updates from Scout
-
-### 7/20/21
-Added google analytics integration to log
