@@ -32,7 +32,7 @@ This SDK allows you to specify a context when calling the `getFeature` method. A
 const SDK = require("pioneer-javascript-sdk");
 const scoutAddress = "http://localhost:3030";
 const sdkKey = "JazzyElksRule";
-const config = await new SDK(scoutAddress, sdkKey).connect().withWaitForData({ timeOut: 1000, pollingAttempts: 10 });  // makes an active sse connection
+const config = await new SDK(scoutAddress, sdkKey).connect().withWaitForData();  // makes an active sse connection
 const context = config.withContext({ userKey: "123-456-789" }); // calling with context returns a new clientWithContext instance
 console.log(context.getFeature("LOGIN_MICROSERVICE")); // gets the feature value based on userKey and percentage strategy
 ```
@@ -119,8 +119,7 @@ This will refer to a new `EventSourceClient` instance that will be instantiated 
 This will internally create a new `EventSourceClient` instance, which is itself a wrapper for the `eventsource` npm package. It will then have the instance try and connect with the Scout daemon. It will return the config instance for additional method chaining. 
 
 ### `async Config.prototype.withWaitForData()`<br>
-This will wait until the `client` instance has received data from Scout. You should only call this after you called connect, otherwise the `client` instance will be undefined. You can supply an object literal specifying the connection parameters.
-Eg: `{ timeOut: 1000, pollingAttempts: 10 }`. The `timeOut` property represents the amount of time to wait between each poll in milliseconds. The `pollingAttempts` represents the number of times that it should attempt to poll. The polling checks for a `hasData` property in the `client` instance, which gets set to true when the `client` receives data from Scout through SSE. This method will also add a random jitter between each waiting interval.
+This will wait until the `client` instance has received data from Scout. You should only call this after you called connect, otherwise the `client` instance will be undefined. The polling checks for a `hasData` property in the `client` instance, which gets set to true when the `client` receives data from Scout through SSE. This method will attempt to poll 10 times and also add a 1 to 10 second random jitter between each waiting interval.
 
 ### `Config.prototype.withContext()`<br>
 This method should be called after you have connected with Scout. This will return a new `clientWithContext` instance. The parameter is an object literal containing the userKey property: `{ userKey: "123-456-789" }`. Ideally, the `userKey` will be some unique identifier for a user making the request for your app.
