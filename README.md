@@ -169,7 +169,7 @@ This will return the server address string append with a path for the proper Sco
 `config`
 A `Config` instance should be passed into the constructor.
 
-**Instance Properties:**
+## **Instance Properties:**
 
 ### `EventSource.prototype.config`<br/>
 The `Config` instance passed in from the constructor
@@ -183,7 +183,7 @@ This will be initialized to `false`. Once the SDK client has received data from 
 ### `EventSource.prototype.apiClient` <br/>
 This will refer to the actual `eventsource` instance intialized by the polyfill package. You can call methods like `close()` on this instance if you want to manually close the connection.
 
-**Instance Methods:**
+## **Instance Methods:**
 
 ### `EventSource.prototype.getFeature()` <br/>
 This will take in a key (string) and a default value (boolean). It will check the `features` ruleset for a matching key and return the value of that feature (a boolean). If a matching key is not found, the method will default to the default value. If a default value is not supplied, it will throw an error.
