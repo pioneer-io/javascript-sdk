@@ -27,7 +27,7 @@ After you have connected, the `client` property on the config instance should be
 const SDK = require("pioneer-javascript-sdk");
 const scoutAddress = "http://localhost:3030"; // if the actual address has a path, include that in the getServerAddress() method
 const sdkKey = "JazzyElksRule"; // the sdkKey that should match the sdkKey provided by Compass
-const config = await new SDK(scoutAddress, sdkKey).connect().withWaitForData({ timeOut: 1000, pollingAttempts: 10 });  // makes an active sse connection
+const config = await new SDK(scoutAddress, sdkKey).connect().withWaitForData();  // makes an active sse connection
 const sdkClient = config.client;
 if (sdkClient.getFeature("LOGIN_MICROSERVICE") { // gets the feature value
   // route the request to a microservice
