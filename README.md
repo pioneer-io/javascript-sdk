@@ -25,11 +25,19 @@ After you have connected, the `client` property on the config instance should be
 
 ```javascript
 const SDK = require("pioneer-javascript-sdk");
-const scoutAddress = "http://localhost:3030"; // if the actual address has a path, include that in the getServerAddress() method
-const sdkKey = "JazzyElksRule"; // the sdkKey that should match the sdkKey provided by Compass
-const config = await new SDK(scoutAddress, sdkKey).connect().withWaitForData();  // makes an active sse connection
+
+// if the actual address has a path like localhost:3030/features, include that in the getServerAddress() method
+const scoutAddress = "http://localhost:3030";
+
+// the sdkKey that should match the sdkKey provided by Compass
+const sdkKey = "JazzyElksRule";
+
+// makes an active sse connection
+const config = await new SDK(scoutAddress, sdkKey).connect().withWaitForData();
 const sdkClient = config.client;
-if (sdkClient.getFeature("LOGIN_MICROSERVICE") { // gets the feature value
+
+// gets the feature value
+if (sdkClient.getFeature("LOGIN_MICROSERVICE") {
   // route the request to a microservice
 } else {
   // call a monolith internal service
@@ -44,9 +52,15 @@ This SDK allows you to specify a context when calling the `getFeature` method. A
 const SDK = require("pioneer-javascript-sdk");
 const scoutAddress = "http://localhost:3030";
 const sdkKey = "JazzyElksRule";
-const config = await new SDK(scoutAddress, sdkKey).connect().withWaitForData();  // makes an active sse connection
-const context = config.withContext({ userKey: "123-456-789" }); // calling with context returns a new clientWithContext instance
-if (context.getFeature("LOGIN_MICROSERVICE") { // gets the feature value based on userKey and percentage strategy
+
+// makes an active sse connection
+const config = await new SDK(scoutAddress, sdkKey).connect().withWaitForData();
+
+// calling with context returns a new clientWithContext instance
+const context = config.withContext({ userKey: "123-456-789" });
+
+// gets the feature value based on userKey and percentage strategy
+if (context.getFeature("LOGIN_MICROSERVICE") {
   // route the request to a microservice
 } else {
   // call a monolith internal service
