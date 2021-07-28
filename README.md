@@ -12,7 +12,10 @@ Visit the [pioneer-io/compass](github.com/pioneer-io/compass) repo for more, and
 
 ## Installation
 
-`npm install pioneer-javascript-sdk` for the package.
+Run the following command inside an npm project for the package.
+```
+npm install pioneer-javascript-sdk
+```
 
 ## Basic Usage
 
