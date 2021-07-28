@@ -121,27 +121,27 @@ A string that represents the sdk key that is to be used for authorization. Gener
 
 ## **Instance Properties**
 
-### `Config.prototype.serverAddress`<br>
+### `Config.prototype.serverAddress`<br/>
 ServerAddress and port
 
-### `Config.prototype.sdkKey`<br>
+### `Config.prototype.sdkKey`<br/>
 SDK Key for authorization
 
-### `Config.prototype.client`<br>
+### `Config.prototype.client`<br/>
 This will refer to a new `EventSourceClient` instance that will be instantiated when you call the `connect` method.
 
 ## **Instance Methods**
 
-### `Config.prototype.connect()`<br>
+### `Config.prototype.connect()`<br/>
 This will internally create a new `EventSourceClient` instance, which is itself a wrapper for the `eventsource` npm package. It will then have the instance try and connect with the Scout daemon. It will return the config instance for additional method chaining. 
 
-### `async Config.prototype.withWaitForData()`<br>
+### `async Config.prototype.withWaitForData()`<br/>
 This will wait until the `client` instance has received data from Scout. You should only call this after you called connect, otherwise the `client` instance will be undefined. The polling checks for a `hasData` property in the `client` instance, which gets set to true when the `client` receives data from Scout through SSE. This method will attempt to poll 10 times and also add a 1 to 10 second random jitter between each waiting interval.
 
-### `Config.prototype.withContext()`<br>
+### `Config.prototype.withContext()`<br/>
 This method should be called after you have connected with Scout. This will return a new `clientWithContext` instance. The parameter is an object literal containing the userKey property: `{ userKey: "123-456-789" }`. Ideally, the `userKey` will be some unique identifier for a user making the request for your app.
 
-### `Config.prototype.getServerAddress()`<br>
+### `Config.prototype.getServerAddress()`<br/>
 This will return the server address string append with a path for the proper Scout endpoint. This method is used internally when initializing an event source instance, and you probably do not really need to use it except for debugging purposes. Eg: If your server address is `http://localhost:3030`, then this method will return `http://localhost:3030/features`, which will specify the proper path for the Scout endpoint to connect to.
 
 
@@ -157,27 +157,27 @@ A `Config` instance should be passed into the constructor.
 
 **Instance Properties:**
 
-### `EventSource.prototype.config`<br>
+### `EventSource.prototype.config`<br/>
 The `Config` instance passed in from the constructor
 
-### `EventSource.prototype.features` <br>
+### `EventSource.prototype.features` <br/>
 This will be initialized to an empty object in the constructor. When an SSE connection is established and the SDK client receives the entire feature set from Scout, this property will be populated with that featureset, representing an array of feature state instances. This property will be referenced by the `getFeatures` method and the developer would probably only use this for debuggin purposes.
 
-### `EventSource.prototype.hasData` <br>
+### `EventSource.prototype.hasData` <br/>
 This will be initialized to `false`. Once the SDK client has received data from Scout, this will be set to `true`. This property is checked by the `withWaitForData` method, to poll for when the SDK has received data. It could also be used for debugging purposes by the developer.
 
-### `EventSource.prototype.apiClient` <br>
+### `EventSource.prototype.apiClient` <br/>
 This will refer to the actual `eventsource` instance intialized by the polyfill package. You can call methods like `close()` on this instance if you want to manually close the connection.
 
 **Instance Methods:**
 
-### `EventSource.prototype.getFeature()` <br>
+### `EventSource.prototype.getFeature()` <br/>
 This will take in a key (string) and a default value (boolean). It will check the `features` ruleset for a matching key and return the value of that feature (a boolean). If a matching key is not found, the method will default to the default value. If a default value is not supplied, it will throw an error.
 
-### `EventSource.prototype.getFeatureState()` <br>
+### `EventSource.prototype.getFeatureState()` <br/>
 This method will take in a key and return the feature state in `features` corresponding to that key. If no feature state is found, the method will return undefined.
 
-### `EventSource.prototype.addGoogleAnalyticsCollector()` <br>
+### `EventSource.prototype.addGoogleAnalyticsCollector()` <br/>
 This takes in an object literal, consisting of the following properties:
 `{ trackingId: string, clientId: string (optional), strictCidFormat: boolean (optional) }`
 
@@ -191,7 +191,7 @@ The `trackingId` and `clientId` should both be strings. The `strictCidFormat` is
 
 This method will append an instance of the `AnalyticsCollector` class to a list of analytics collectors and return the instance.
 
-### `EventSource.prototype.logEvent()` <br>
+### `EventSource.prototype.logEvent()` <br/>
 This method takes in an object literal, consiting of the following properties:
 `{ category: string, action: string, label: string, value: number }`
 
@@ -199,7 +199,7 @@ This method takes in an object literal, consiting of the following properties:
 | -------- | ---- | :--------: |
 | category | string | yes |
 | action | string | yes |
-| label | string | no <br> (but recommended) |
+| label | string | no <br/> (but recommended) |
 | value | string | no |
 
 More info about these properties can be found [here](https://support.google.com/analytics/answer/1033068?hl=en#).
@@ -212,26 +212,26 @@ This method will iterate over all appended analytics collectors and call the `lo
 
 ## **Instance Properties**
 
-### `ClientWithContext.prototype.context` <br>
+### `ClientWithContext.prototype.context` <br/>
 An instance of the `Context` class. This basically just has the `userKey` property and a `getKey()` getter method. The context will be factored into calculating the strategy value when calling `getFeature()` on a `clientWithContext` instance.
 
-### `ClientWithContext.prototype.client` <br>
+### `ClientWithContext.prototype.client` <br/>
 This refers to the `client` instance of the `EventSourceClient` class.
 
-### `ClientWithContext.prototype.config` <br>
+### `ClientWithContext.prototype.config` <br/>
 This referse to the `config` instance of the `Config` class (on which you call the `withContext()` method).
 
 ## **Instance Methods**
 
-### `ClientWithContext.prototype.getFeature()` <br>
+### `ClientWithContext.prototype.getFeature()` <br/>
 This will take in a key (string) and a default value (boolean). It will check the `features` ruleset for a matching key and return the value of that feature (a boolean). If a matching key is not found, the method will default to the default value. If a default value is not supplied, it will throw an error.
 
 The difference between the `getFeature()` method on the `EventSourceClient` instance is that this will evaluate a percentage strategy based on the context, which has the `userKey`. It will sum up the char codes of the `userKey` modulus 100 and return a number between 1-100. If that number is lower than the percentage strategy, it will return true. Otherwise, it will return false.
 
-### `ClientWithContext.prototype.addGoogleAnalyticsCollector()` <br>
+### `ClientWithContext.prototype.addGoogleAnalyticsCollector()` <br/>
 This will basically take in the same parameters as the `addGoogleAnalyticsCollector()` method of `EventSourceClient`. It will then call `addGoogleAnalyticsCollector` on its `client` property with those parameters.
 
-### `ClientWithContext.prototype.logEvent()` <br>
+### `ClientWithContext.prototype.logEvent()` <br/>
 This will basically take in the same parameters as the `logEvent()` method of `EventSourceClient`. It will then call `logEvent()` on its `client` property with those parameters.
 
 ------
