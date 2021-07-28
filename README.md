@@ -8,7 +8,7 @@
 
 This package is a server-side SDK for applications written in Node.js using Pioneer's feature management service.
 
-Visit the [pioneer-io/compass](github.com/pioneer-io/compass) repo for more, and check out Pioneer's case study page.
+Visit the [pioneer-io/compass](github.com/pioneer-io/compass) repo for more, and check out Pioneer's [case study page](https://pioneer-io.github.io/).
 
 ## Installation
 
