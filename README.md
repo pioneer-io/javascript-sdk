@@ -29,7 +29,11 @@ const scoutAddress = "http://localhost:3030"; // if the actual address has a pat
 const sdkKey = "JazzyElksRule"; // the sdkKey that should match the sdkKey provided by Compass
 const config = await new SDK(scoutAddress, sdkKey).connect().withWaitForData({ timeOut: 1000, pollingAttempts: 10 });  // makes an active sse connection
 const sdkClient = config.client;
-console.log(sdkClient.getFeature("LOGIN_MICROSERVICE")); // gets the feature value
+if (sdkClient.getFeature("LOGIN_MICROSERVICE") { // gets the feature value
+  // route the request to a microservice
+} else {
+  // call a monolith internal service
+};
 ```
 
 ## Adding a Context
@@ -42,7 +46,11 @@ const scoutAddress = "http://localhost:3030";
 const sdkKey = "JazzyElksRule";
 const config = await new SDK(scoutAddress, sdkKey).connect().withWaitForData();  // makes an active sse connection
 const context = config.withContext({ userKey: "123-456-789" }); // calling with context returns a new clientWithContext instance
-console.log(context.getFeature("LOGIN_MICROSERVICE")); // gets the feature value based on userKey and percentage strategy
+if (context.getFeature("LOGIN_MICROSERVICE") { // gets the feature value based on userKey and percentage strategy
+  // route the request to a microservice
+} else {
+  // call a monolith internal service
+};
 ```
 
 ## Supplying default values
@@ -50,8 +58,9 @@ console.log(context.getFeature("LOGIN_MICROSERVICE")); // gets the feature value
 Any time you call getFeature on either a normal `client` or on a `clientWithContext`, you can supply a default value for the second parameter in case the feature you are trying to index does not exist.
 
 ```javascript
-console.log(sdkClient,getFeature("LOGIN_MICROSERVICE", false));
-console.log(context.getFeature("LOGIN_MICROSERVICE", false));
+// both of the following will return false if the feature "LOGIN_MICROSERVICE" does not exist
+sdkClient,getFeature("LOGIN_MICROSERVICE", false);
+context.getFeature("LOGIN_MICROSERVICE", false);
 ```
 
 Thus, if `LOGIN_MICROSERVICE` is not a valid feature, then both statements will log `false`. If no default value is supplied, an error will be thrown.
