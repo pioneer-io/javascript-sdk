@@ -1,15 +1,14 @@
 const ClientWithContext = require("../clientWithContext");
 const FakeEventSourceClient = require("../mocks/fakeEventSourceClient");
 const FakeConfig = require("../mocks/fakeConfig");
-//const FakeFeatureState = require("../mocks/fakeFeatureState");
-const FakeFeatureState = require('../featureState');
+const FeatureState = require('../featureState');
 const Context = require('../context');
 
 describe("testing clientWithContext", () => {
   //const context = new Context({ userKey: "123" });
   const config = new FakeConfig("http://localhost:3000", "JazzyElksRule");
   const client = new FakeEventSourceClient(config);
-  client.features["LOGIN_MICROSERVICE"] = new FakeFeatureState({
+  client.features["LOGIN_MICROSERVICE"] = new FeatureState({
     title: "LOGIN_MICROSERVICE",
     value: true,
     strategy: {
@@ -17,7 +16,7 @@ describe("testing clientWithContext", () => {
     }
   });
 
-  client.features["FEATURE_OFF"] = new FakeFeatureState({
+  client.features["FEATURE_OFF"] = new FeatureState({
     title: "FEATURE_OFF",
     value: false,
     strategy: {

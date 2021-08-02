@@ -1,5 +1,5 @@
 const FakeEventSource = require("./fakeEventSource");
-const FakeFeatureState = require('./fakeFeatureState');
+const FeatureState = require('../featureState');
 const EventSourceClient = require('../eventSourceClient');
 
 class FakeEventSourceClient extends EventSourceClient {
@@ -25,7 +25,7 @@ class FakeEventSourceClient extends EventSourceClient {
         value: is_active,
         title
       }
-      featureStates[title] = new FakeFeatureState(modifiedFeatureStateParams);
+      featureStates[title] = new FeatureState(modifiedFeatureStateParams);
     })
     this.features = featureStates;
 
