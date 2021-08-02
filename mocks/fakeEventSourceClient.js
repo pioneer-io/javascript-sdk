@@ -50,13 +50,6 @@ class FakeEventSourceClient {
     }
   }
 
-  handleUpdateFeature(payload) {
-    const { key } = payload;
-
-    // create a new feature state and override the previous value
-    this.features[key] = new FakeFeatureState(payload);
-  }
-
   handleAllFeatures(payload) {
     // initialize a new object of feature states and override the previous value
     const featureStates = {};
@@ -67,7 +60,7 @@ class FakeEventSourceClient {
         value: is_active,
         title
       }
-      featureStates[title] = new FeatureState(modifiedFeatureStateParams);
+      featureStates[title] = new FakeFeatureState(modifiedFeatureStateParams);
     })
     this.features = featureStates;
 
