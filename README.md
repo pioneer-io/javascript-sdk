@@ -5,6 +5,7 @@
 # Node.js SDK for Pioneer
 [![pioneer-javascript-sdk](https://github.com/pioneer-io/javascript-sdk/actions/workflows/verify.yml/badge.svg)](https://github.com/pioneer-io/javascript-sdk/actions/workflows/verify.yml)
 [![npm version](https://badge.fury.io/js/pioneer-javascript-sdk.svg)](https://www.npmjs.com/package/pioneer-javascript-sdk)
+![npm](https://img.shields.io/npm/dt/pioneer-javascript-sdk)
 
 This package is a server-side SDK for applications written in Node.js using Pioneer's feature management service.
 
