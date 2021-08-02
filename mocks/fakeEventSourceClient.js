@@ -1,11 +1,11 @@
 const FakeEventSource = require("./fakeEventSource");
-const eventTypes = require('../lib/eventTypes');
 const FakeFeatureState = require('./fakeFeatureState');
+const EventSourceClient = require('../eventSourceClient');
 
-class FakeEventSourceClient {
+class FakeEventSourceClient extends EventSourceClient {
   constructor(config) {
-    this.config = config;
-    this.features = {};
+    super(config)
+    this.apiClient.close();
 
     const options = {
       headers: { Authorization: config.sdkKey}
@@ -13,41 +13,6 @@ class FakeEventSourceClient {
 
     const apiClient = new FakeEventSource(config.getServerAddress(), options);
     this.apiClient = apiClient;
-  }
-
-  start() {
-    // start listening for SSE messages
-    this.handleEvents();
-    this.handleErrors();
-  }
-
-  handleEvents() {
-    this.apiClient.onmessage = (event) => {
-      // JSON parse the entire SSE message (in the data property)
-      const data = JSON.parse(event.data);
-
-      // get the eventType
-      const eventType = data.eventType;
-
-      // get the payload
-      const payload = data.payload;
-
-      // call the proper handler function based on the eventType
-      switch (eventType) {
-
-        case eventTypes.UPDATE_FEATURE:
-          this.handleUpdateFeature(payload);
-
-        case eventTypes.ALL_FEATURES:
-          this.handleAllFeatures(payload);
-      }
-    }
-  }
-
-  handleErrors() {
-    this.apiClient.onerror = (error) => {
-      console.log("Event source failed: ", error);
-    }
   }
 
   handleAllFeatures(payload) {
@@ -65,19 +30,6 @@ class FakeEventSourceClient {
     this.features = featureStates;
 
     this.hasData = true;
-  }
-
-  getFeature(key, defaultValue) {
-    const featureState = this.getFeatureState(key);
-    if (!featureState) {
-      return handleUndefinedFeature(key, defaultValue);
-    }
-    const value = featureState.value;
-    return value;
-  }
-
-  getFeatureState(key) {
-    return this.features[key];
   }
 }
 
