@@ -6,19 +6,16 @@ const handleUndefinedFeature = require('./lib/handleUndefinedFeature');
 
 class EventSourceClient {
   constructor(config) {
-    // todo: typechecks
-
     this.config = config;
     this.features = {};
 
     this.hasData = false;
     this.analyticsCollectors = [];
-    
+
     const options = {
       headers: { Authorization: config.sdkKey}
     }
 
-    // initialize the SSE with edge
     const apiClient = new EventSource(config.getServerAddress(), options);
     this.apiClient = apiClient;
   }
@@ -36,7 +33,7 @@ class EventSourceClient {
 
       // get the eventType
       const eventType = data.eventType;
-      
+
       // get the payload
       const payload = data.payload;
 
@@ -46,7 +43,7 @@ class EventSourceClient {
         case eventTypes.UPDATE_FEATURE:
           this.handleUpdateFeature(payload);
           return
-          
+
         case eventTypes.ALL_FEATURES:
           this.handleAllFeatures(payload);
           return

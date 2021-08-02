@@ -1,22 +1,21 @@
 const ClientWithContext = require("../clientWithContext");
 const FakeEventSourceClient = require("../mocks/fakeEventSourceClient");
 const FakeConfig = require("../mocks/fakeConfig");
-const FakeFeatureState = require("../mocks/fakeFeatureState");
+const FeatureState = require('../featureState');
 const Context = require('../context');
 
 describe("testing clientWithContext", () => {
-  const context = new Context({ userKey: "123" });
   const config = new FakeConfig("http://localhost:3000", "JazzyElksRule");
   const client = new FakeEventSourceClient(config);
-  client.features["LOGIN_MICROSERVICE"] = new FakeFeatureState({
+  client.features["LOGIN_MICROSERVICE"] = new FeatureState({
     title: "LOGIN_MICROSERVICE",
     value: true,
     strategy: {
-      percentage: 0.1,
+      percentage: 1,
     }
   });
 
-  client.features["FEATURE_OFF"] = new FakeFeatureState({
+  client.features["FEATURE_OFF"] = new FeatureState({
     title: "FEATURE_OFF",
     value: false,
     strategy: {
@@ -27,8 +26,8 @@ describe("testing clientWithContext", () => {
   let cwc;
 
   beforeEach(() => {
+    const context = new Context({ userKey: "user123" })
     cwc = new ClientWithContext({ context, client, config });
-    cwc.context.userKey = "user123";
   });
 
   test("create a new ClientWithContext", () => {
@@ -40,7 +39,7 @@ describe("testing clientWithContext", () => {
 
   test("get feature with strategy", () => {
     expect(cwc.getFeature('LOGIN_MICROSERVICE')).toBe(false);
-    cwc.context.userKey = "dfb"; // will hash to 0 percentage
+    cwc.context.userKey = "dfb"; // hashes to 1 percent
     expect(cwc.getFeature('LOGIN_MICROSERVICE')).toBe(true);
   });
 

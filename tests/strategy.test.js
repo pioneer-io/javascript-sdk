@@ -1,12 +1,10 @@
 const Strategy = require("../strategy");
-const FakeContext = require("../mocks/fakeContext");
+const Context = require("../context");
 
 describe("testing strategy", () => {
-  const context = new FakeContext({ userKey: "user123" });
   test("creating a new strategy", () => {
     const strategy = new Strategy({ percentage: 0.1, value: true });
     expect(strategy.percentage).toBe(0.1);
-    // expect(strategy.value).toBe(true); // value property no longer added because strategy will only return true/false
   });
 
   test("hashBasedPercentage of user123", () => {
@@ -21,13 +19,13 @@ describe("testing strategy", () => {
 
   test("calculating a strategy value that does not meet the percentage", () => {
     const strategy = new Strategy({ percentage: 10, value: true });
-    const context = new FakeContext({ userKey: "user123" });
+    const context = new Context({ userKey: "user123" });
     expect(strategy.calculate(context)).toBe(false);
   });
 
   test("calculating a strategy value that does meet the percentage", () => {
     const strategy = new Strategy({ percentage: 10, value: true });
-    const context = new FakeContext({ userKey: "dfb" });
+    const context = new Context({ userKey: "dfb" });
     expect(strategy.calculate(context)).toBe(true);
   });
 });
