@@ -1,10 +1,8 @@
 class FakeEventSource {
   constructor(serverAddress, options) {
-    // todo: typechecks
-
     this.serverAddress = serverAddress;
     this.options = options;
-    
+
     return this;
   }
 

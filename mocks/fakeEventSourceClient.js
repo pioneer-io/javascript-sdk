@@ -4,16 +4,13 @@ const FakeFeatureState = require('./fakeFeatureState');
 
 class FakeEventSourceClient {
   constructor(config) {
-    // todo: typechecks
-
     this.config = config;
     this.features = {};
-    
+
     const options = {
       headers: { Authorization: config.sdkKey}
     }
 
-    // initialize the SSE with edge
     const apiClient = new FakeEventSource(config.getServerAddress(), options);
     this.apiClient = apiClient;
   }
@@ -31,7 +28,7 @@ class FakeEventSourceClient {
 
       // get the eventType
       const eventType = data.eventType;
-      
+
       // get the payload
       const payload = data.payload;
 
@@ -40,7 +37,7 @@ class FakeEventSourceClient {
 
         case eventTypes.UPDATE_FEATURE:
           this.handleUpdateFeature(payload);
-          
+
         case eventTypes.ALL_FEATURES:
           this.handleAllFeatures(payload);
       }

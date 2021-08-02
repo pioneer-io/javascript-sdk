@@ -15,6 +15,5 @@ describe("testing feature state", () => {
     expect(featureState.value).toBe(false);
     expect(featureState.strategy).toBeInstanceOf(Strategy);
     expect(featureState.strategy.percentage).toBe(0.1);
-    // expect(featureState.strategy.value).toBe(true); // commenting this out as we know it's only going to true/false
   });
 });

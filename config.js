@@ -23,7 +23,6 @@ class Config {
     while (this.client.hasData === false) {
       attempts++
       if (attempts > 10) {
-        // throw new Error("Waiting for data reached the max number of attempts");
         console.log("Waiting for data reached the max number of attempts, time out");
         break;
       }

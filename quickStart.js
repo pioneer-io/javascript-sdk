@@ -2,8 +2,8 @@
   const SDK = require("./config");
   try {
     const config = await new SDK("http://localhost:3030", "01ff74d1-8fbb-45f2-a118-6f8115c6e310").connect().withWaitForData();
-    // const client = config.client;
     const context = config.withContext({ userKey: "abc" });
+
     context.addGoogleAnalyticsCollector({
       trackingId: 'UA-201694275-1',
       clientId: '12345',
