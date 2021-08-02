@@ -1,4 +1,3 @@
-const FakeEventSourceClient = require('./fakeEventSourceClient');
 const ClientWithContext = require('../clientWithContext');
 const FakeContext = require('./fakeContext');
 
