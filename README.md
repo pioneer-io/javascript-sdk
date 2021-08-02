@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/19399698/126998779-e3bc3a2d-0e2a-4353-8f3e-9aa857455fe5.png" alt="Pioneer logo" width="200" height="200">
+    <img src="https://user-images.githubusercontent.com/56378698/127357452-1b57af9c-be5a-42ff-aecb-bd2e2c006716.png" alt="Pioneer logo" width="200" height="200">
 </p>
 
 # Node.js SDK for Pioneer
@@ -8,7 +8,7 @@
 
 This package is a server-side SDK for applications written in Node.js using Pioneer's feature management service.
 
-Visit the [pioneer-io/compass](github.com/pioneer-io/compass) repo for more, and check out Pioneer's case study page.
+Visit the [pioneer-io/pioneer](https://github.com/pioneer-io/pioneer) repo for more, and check out Pioneer's [case study page](https://pioneer-io.github.io/).
 
 ## Installation
 
