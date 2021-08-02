@@ -1,10 +1,10 @@
-const FakeStrategy = require('./fakeStrategy');
+const Strategy = require('../strategy');
 
 class FakeFeatureState {
   constructor({title, value, strategy}) {
     this.title = title;
     this.value = value;
-    this.strategy = new FakeStrategy(strategy);
+    this.strategy = new Strategy(strategy);
   }
 
 }
