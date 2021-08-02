@@ -1,5 +1,5 @@
 const FakeEventSourceClient = require('./fakeEventSourceClient');
-const FakeClientWithContext = require('./fakeClientWithContext');
+const ClientWithContext = require('../clientWithContext');
 const FakeContext = require('./fakeContext');
 
 class FakeConfig {
@@ -17,7 +17,7 @@ class FakeConfig {
 
   withContext() {
     const self = this;
-    return new FakeClientWithContext({
+    return new ClientWithContext({
       context: new FakeContext({
 
         userKey: "user123"
