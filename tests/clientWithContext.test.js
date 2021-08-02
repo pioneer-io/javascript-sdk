@@ -5,7 +5,6 @@ const FeatureState = require('../featureState');
 const Context = require('../context');
 
 describe("testing clientWithContext", () => {
-  //const context = new Context({ userKey: "123" });
   const config = new FakeConfig("http://localhost:3000", "JazzyElksRule");
   const client = new FakeEventSourceClient(config);
   client.features["LOGIN_MICROSERVICE"] = new FeatureState({
