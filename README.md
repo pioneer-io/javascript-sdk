@@ -255,3 +255,4 @@ This will basically take in the same parameters as the `logEvent()` method of `E
 
 ## Tests
 To run tests, simply run `npm test`, which will run unit tests for most of the classes.
+*Note:* Tests are npm ignored, so you have to pull from github for the tests.
