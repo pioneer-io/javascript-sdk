@@ -53,7 +53,7 @@ if (sdkClient.getFeature("LOGIN_MICROSERVICE") {
 
 ## Adding a Context
 
-This SDK allows you to specify a context when calling the `getFeature` method. A context allows the SDK to evaluate strategies associated with a certain feature state. For example, a feature flag has a rollout strategy, such that only 10% of users should get the new feature, if the feature flag was turned on in via the Compass user interface or API. In order to determine whether a user gets that new feature, the developer should supply a userKey that uniquely identifies that user. The SDK will calculate the percentage associated with that uesrKey and if that percentage is lower than 10%, then the SDK will evaluate to true.
+This SDK allows you to specify a context when calling the `getFeature` method. A context allows the SDK to evaluate strategies associated with a certain feature state. Before using a context though, the feature flag must have a rollout strategy, greater than 0%, and the feature flag must be toggled on  via the Compass user interface or API. In order to determine whether a user gets that new feature, the developer should supply a userKey that uniquely identifies that user. The SDK will calculate the percentage associated with that uesrKey and if that percentage is lower than 10%, then the SDK will evaluate to true.
 
 ```javascript
 const SDK = require("pioneer-javascript-sdk");
@@ -76,7 +76,7 @@ if (context.getFeature("LOGIN_MICROSERVICE") {
 
 ## Supplying default values
 
-Any time you call getFeature on either a normal `client` or on a `clientWithContext`, you can supply a default value for the second parameter in case the feature you are trying to index does not exist.
+Any time you call `getFeature` on either a normal `client` or on a `clientWithContext`, you can supply a default value for the second parameter in case the feature you are trying to index does not exist.
 
 ```javascript
 // both of the following will return false if the feature "LOGIN_MICROSERVICE" does not exist
