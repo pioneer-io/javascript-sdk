@@ -23,7 +23,7 @@ npm install pioneer-javascript-sdk
 
 To initialize a new SDK client, you need to pass in the server address and port of Scout for the first parameter. **Scout is the name of a daemon that serves the entire feature ruleset to all connected SDK clients through SSE.** Note, that if the actual endpoint contains a path like "/features", then you should include that in the `getServerAddress()` method of config. In addition, you need to supply an SDK key so that Scout can authenticate requests. This SDK key must match the one provded by Compass, and can be found under the 'Account' tab via the user interface.
 
-After instantiating a new SDK, you can call `connect()` which will attempt to connect with Scout. You should also chain another method called `withWaitForData()`. Calling await on this method will block the code until the SDK receives the entire ruleset from Scout. The SDK will poll for when it receives data from Scout, 10 times with an interval of around 1-10 seconds. After these polling attempts, if it still has not received data, it will close the connection to avoid overwhelming Scout with requests.
+After instantiating a new SDK, you can call `connect()` which will attempt to connect with Scout. You should also chain another method called `withWaitForData()`. Calling await on this method will block the code until the SDK receives the entire ruleset from Scout. The SDK will poll for when it receives data from Scout, 10 times with an interval of 1 second. After these polling attempts, if it still has not received data, it will close the connection to avoid overwhelming Scout with requests.
 
 If the connection fails 10 times, an error will be logged to the user and the SDK will stop trying to connect.
 
@@ -157,7 +157,7 @@ This will refer to a new `EventSourceClient` instance that will be instantiated 
 This will internally create a new `EventSourceClient` instance, which is itself a wrapper for the `eventsource` npm package. It will then have the instance try and connect with the Scout daemon. It will return the config instance for additional method chaining. 
 
 ### `async Config.prototype.withWaitForData()`<br/>
-This will wait until the `client` instance has received data from Scout. You should only call this after you called connect, otherwise the `client` instance will be undefined. The polling checks for a `hasData` property in the `client` instance, which gets set to true when the `client` receives data from Scout through SSE. This method will attempt to poll 10 times with a waiting interval of around 1-10 seconds, after which it will close the SSE connection.
+This will wait until the `client` instance has received data from Scout. You should only call this after you called connect, otherwise the `client` instance will be undefined. The polling checks for a `hasData` property in the `client` instance, which gets set to true when the `client` receives data from Scout through SSE. This method will attempt to poll 10 times with a waiting interval of 1 second, after which it will close the SSE connection.
 
 ### `Config.prototype.withContext()`<br/>
 This method should be called after you have connected with Scout. This will return a new `clientWithContext` instance. The parameter is an object literal containing the userKey property: `{ userKey: "123-456-789" }`. Ideally, the `userKey` will be some unique identifier for a user making the request for your app.

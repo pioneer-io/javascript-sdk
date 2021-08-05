@@ -30,8 +30,7 @@ class Config {
         console.log("Event source closed");
         break;
       }
-      const randomJitter = (9000 * Math.random());
-      await wait(1000 + randomJitter);
+      await wait(1000);
     }
     return this;
   }
