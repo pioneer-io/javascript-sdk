@@ -23,7 +23,11 @@ class Config {
     while (this.client.hasData === false) {
       attempts++
       if (attempts > 10) {
+        // close
         console.log("Waiting for data reached the max number of attempts, time out");
+        console.log("Closing event source...");
+        this.client.close();
+        console.log("Event source closed");
         break;
       }
       const randomJitter = (9000 * Math.random());
